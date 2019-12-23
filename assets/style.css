@@ -1,0 +1,26 @@
+body {
+    background: url("./Images/herringbone.png") !important;
+    background-position: center;
+    background-size: cover;
+}
+
+h2 {
+     font-size: 40px;
+     color: grey;
+}
+
+h3 {
+    margin-top: 7%;
+    color: grey;
+}
+
+h4 {
+    font-size:16px;
+    background-color: teal;
+    padding: 1%;
+    color: white;
+}
+
+.answ{
+    margin-left: 5%;
+}

@@ -6,18 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Code Quiz</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
-<body>
+<body id="body">
+
+    <div class="card shadow-sm p-3 mb-5 bg-white rounded" style="max-width: 50%; margin: 40px auto;">
+        <div class="card-body">
+        <button type="button" class="btn btn-light" id= "highScores" style= "float:left;">High Scores</button>
+        <button type="button" class="btn btn-light" id= "timer" style= "float:right;">Time Left: 75</button>
+          <br>
+          <h3 class = "question questionHeader"></h3> 
+          <br>
+          <div class= "answers"></div> 
+          <div class= "text-center" id= "startText">
+          <h1 class="card-title">Code Quiz Challenge</h1>
+          <br>
+          <br>
+          <p>Try and answer the following code related questions within the time limit.  Keep in mind that incorrect answers will penalize your score time by ten seconds.</p>
+          <br>
+          <br>
+    
+          <button type="button" class="btn btn-secondary btn-lg" id= "start">Start Code Quiz</button>
+         </div>
+    </div>
+    </div>   
+
+
 
     
-
-
-
 
 <script src="./assets/script.js"></script>
 <script src="./assets/questions.js"></script> 
 </body>
 </html>
+
+
+
+
