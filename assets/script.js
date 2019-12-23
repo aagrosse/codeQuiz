@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-var timeremaining = 75
+var secondsLeft = 75
 var indexQandA = 0;
 var questions = [
     {
@@ -33,6 +33,7 @@ var questions = [
 $("#start").on("click", function () {
     $('#startText').remove();
     loadQandA();
+    setTimer();
 });
 
 
@@ -43,9 +44,67 @@ function loadQandA() {
     $('.question').html(question);
     for (var i = 0; i < 4; i++) {
         var answer = questions[indexQandA].choices[i];
-        $('.answers').append('<h4 class= "btn btn-info" id=' + i + '>' + answer + '</h4><br>');
+        $('.answers').append('<h4 class= "btn btn-info" id=' + answer + '>' + answer + '</h4><br>');
+    }
+    
+    $("h4").click(function () {
+        var id = $(this).attr('id');
+        if (id === answer) {
+            answered = true; 
+            $('.question').text("Correct Answer");
+            correctAnswer();
+        } else {
+            answered = true; 
+            $('.question').text("Wrong Answer");
+            incorrectAnswer();
+        }
+    });
+
+    
+function correctAnswer(){
+    resetRound();
+}
+
+function incorrectAnswer(){
+    resetRound();
+    //take timer down by 10
+}
+
+function resetRound(){
+    indexQandA++;
+    $('.btn-info').remove();
+    if (indexQandA < questions.length) {
+        loadQandA();
+    } else {
+        //submit high score form and buttons here
     }
 }
 
 
+
+function setTimer(){
+    $("#seconds-left").text(secondsLeft);
+let countdown = setInterval(function(){
+    secondsLeft--;
+    $("#seconds-left").text(secondsLeft);
+    if (secondsLeft <=0) {
+        clearInterval(countdown);
+    }
+}, 1000);
+
+
+
+
+}
+
+
+
+
+}
+
+
 });
+
+
+
+
