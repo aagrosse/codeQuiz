@@ -37,6 +37,18 @@ $("#start").on("click", function () {
 });
 
 
+function setTimer(){
+    $("#seconds-left").text(secondsLeft);
+let countdown = setInterval(function(){
+    secondsLeft--;
+    $("#seconds-left").text(secondsLeft);
+    if (secondsLeft <=0) {
+        clearInterval(countdown);
+    }
+}, 1000);
+}
+
+
 
 function loadQandA() {
     choices = questions[indexQandA].choices;
@@ -78,23 +90,6 @@ function resetRound(){
     } else {
         //submit high score form and buttons here
     }
-}
-
-
-
-function setTimer(){
-    $("#seconds-left").text(secondsLeft);
-let countdown = setInterval(function(){
-    secondsLeft--;
-    $("#seconds-left").text(secondsLeft);
-    if (secondsLeft <=0) {
-        clearInterval(countdown);
-    }
-}, 1000);
-
-
-
-
 }
 
 
