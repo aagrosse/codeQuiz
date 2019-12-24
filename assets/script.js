@@ -41,7 +41,6 @@ function setTimer(){
     $("#seconds-left").text(secondsLeft);
 let countdown = setInterval(function(){
     secondsLeft--;
-    console.log(countdown);
     $("#seconds-left").text(secondsLeft);
     if (secondsLeft <=0) {
         clearInterval(countdown);
@@ -67,13 +66,13 @@ function loadQandA() {
         if (id === answer) {
             answered = true;
             console.log("correct") 
-            $('.question').text("Correct Answer");
+            // $('.question').text("Correct Answer");
             indexQandA++;
             correctAnswer();
         
         } else {
             answered = true; 
-            $('.question').text("Wrong Answer");
+            // $('.question').text("Wrong Answer");
             indexQandA++;
             incorrectAnswer();
         }
@@ -95,14 +94,16 @@ function timerDown(){
 }
 
 function resetRound(){
-    // indexQandA++;
     $('.btn-info').remove();
     if (indexQandA < questions.length) {
         loadQandA();
     } else {
-        //submit high score form and buttons here
-    }
+    $('.question').remove();
+    $('.show-onclick').append('<div class="form-group"> <label id= "initials" ></label><input class="form-control" placeholder="Enter initials"></div><button type="submit" class="btn btn-primary">Submit</button>');
+    $("#initials").append("Your score is: " + secondsLeft)
+        }    
 }
+
 
 
 
