@@ -24,3 +24,8 @@ h4 {
 .answ{
     margin-left: 5%;
 }
+
+#timer{
+    border: 0px;
+    background-color: white;
+}

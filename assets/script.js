@@ -41,6 +41,7 @@ function setTimer(){
     $("#seconds-left").text(secondsLeft);
 let countdown = setInterval(function(){
     secondsLeft--;
+    console.log(countdown);
     $("#seconds-left").text(secondsLeft);
     if (secondsLeft <=0) {
         clearInterval(countdown);
@@ -50,24 +51,30 @@ let countdown = setInterval(function(){
 
 
 
+
 function loadQandA() {
     choices = questions[indexQandA].choices;
     var question = questions[indexQandA].title;
     $('.question').html(question);
     for (var i = 0; i < 4; i++) {
-        var answer = questions[indexQandA].choices[i];
-        $('.answers').append('<h4 class= "btn btn-info" id=' + answer + '>' + answer + '</h4><br>');
+        var displayAnswer = questions[indexQandA].choices[i];
+        $('.answers').append('<h4 class= "btn btn-info" id=' + displayAnswer + '>' + displayAnswer + '</h4><br>');
     }
     
     $("h4").click(function () {
         var id = $(this).attr('id');
+        var answer= questions[indexQandA].answer;
         if (id === answer) {
-            answered = true; 
+            answered = true;
+            console.log("correct") 
             $('.question').text("Correct Answer");
+            indexQandA++;
             correctAnswer();
+        
         } else {
             answered = true; 
             $('.question').text("Wrong Answer");
+            indexQandA++;
             incorrectAnswer();
         }
     });
@@ -79,11 +86,16 @@ function correctAnswer(){
 
 function incorrectAnswer(){
     resetRound();
-    //take timer down by 10
+    timerDown();
+    
+}
+
+function timerDown(){
+    secondsLeft = secondsLeft -= 9;
 }
 
 function resetRound(){
-    indexQandA++;
+    // indexQandA++;
     $('.btn-info').remove();
     if (indexQandA < questions.length) {
         loadQandA();
