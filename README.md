@@ -24,7 +24,7 @@ This project is a code trivia challenge.  Click start to begin.  There are five 
 
 ## Images
 
-![User Interface](/assets/images/screenshot.png)
+![User Interface](./assets/Images/screenshot.png)
 
 ## Installation
 
@@ -44,7 +44,7 @@ no collaberators on this project.  Just me.
 
 ## License
 
-no license needed since im just starting out and this is probablly very rough code.
+no license needed.
 
 
 
