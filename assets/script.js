@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-var secondsLeft = 75
 var indexQandA = 0;
 var questions = [
     {
@@ -15,8 +14,8 @@ var questions = [
     },
     {
       title: "Arrays in JavaScript can be used to store _________",
-      choices: ["numbers and strings", "other arrays", "booleans", "all of the above"],
-      answer: "all of the above"
+      choices: ["numbers and strings", "other arrays", "booleans", "all-of-the-above"],
+      answer: "all-of-the-above"
     },
     {
       title: "String values must be enclosed within _____ when being assigned to variables.",
@@ -29,6 +28,8 @@ var questions = [
       answer: "console.log"
       },
 ]
+var secondsLeft = (questions.length) * 15
+
 
 $("#start").on("click", function () {
     $('#startText').remove();
@@ -57,7 +58,7 @@ function loadQandA() {
     $('.question').html(question);
     for (var i = 0; i < 4; i++) {
         var displayAnswer = questions[indexQandA].choices[i];
-        $('.answers').append('<h4 class= "btn btn-info" id=' + displayAnswer + '>' + displayAnswer + '</h4><br>');
+        $('.answers').append('<h4 class= "button-answer" id=' + displayAnswer + '>' + displayAnswer + '</h4><br>');
     }
     
     $("h4").click(function () {
@@ -86,7 +87,11 @@ function correctAnswer(){
 function incorrectAnswer(){
     resetRound();
     timerDown();
-    
+}
+
+function timerStop(){
+    clearInterval(secondsLeft);
+    console.log(secondsLeft);
 }
 
 function timerDown(){
@@ -94,21 +99,84 @@ function timerDown(){
 }
 
 function resetRound(){
-    $('.btn-info').remove();
+    $('.answers').empty();
+    
     if (indexQandA < questions.length) {
         loadQandA();
     } else {
+    timerStop();
     $('.question').remove();
     $('.show-onclick').append('<div class="form-group"> <label id= "initials" ></label><input class="form-control" placeholder="Enter initials"></div><button type="submit" class="btn btn-primary">Submit</button>');
-    $("#initials").append("Your score is: " + secondsLeft)
+    var score = secondsLeft
+    $("#initials").append("Your score is: " + score);
+        
         }    
 }
-
-
-
-
-
 }
+var highScoreInput = document.querySelector(".form-control");
+var highScoreForm = document.querySelector(".btn-primary");
+var highScoreList = document.querySelector("#high-score");
+var highScores = [];
+
+init();
+
+function renderHighScores() {
+  // Clear highScoreList element
+  highScoreList.innerHTML = "";
+  
+
+  // Render a new li for each highScore
+  for (var i = 0; i < todos.length; i++) {
+    var highScore = highScores[i];
+
+    var li = document.createElement("li");
+    li.textContent = highScore;
+    li.setAttribute("data-index", i);
+    highScoreList.appendChild(li);
+  }
+}
+
+function init() {
+  // Get stored highScores from localStorage
+  var storedHighScoreString = localStorage.getItem("highScores");
+  // Parsing the JSON string to an object
+  var storedHighScores = JSON.parse(storedHighScoreString);
+
+  // If highScores were retrieved from localStorage, update the highScores array to it
+  if (storedHighScores !== null) {
+    highScores = storedHighScores;
+  }
+
+  // Render highScores to the DOM
+  renderHighScores();
+}
+
+function storeHighScores() {
+  // Stringify and set "highScores" key in localStorage to highScores array
+  var highScoresString = JSON.stringify(highScores);
+  
+  localStorage.setItem("highScores", highScoresString);
+}
+
+// When form is submitted...
+highScoreForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  var highScoreText = highScoreInput.value.trim();
+
+  // Return from function early if submitted highScoreText is blank
+  if (highScoreText === "") {
+    return;
+  }
+
+  // Add new highScoreText to highScores array, clear the input
+  highScores.push(highScoreText);
+  highScoreInput.value = "";
+
+  // Store updated highScores in localStorage, re-render the list
+  storeHighScores();
+  renderHighScores();
+});
 
 
 });

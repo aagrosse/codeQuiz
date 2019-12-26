@@ -33,3 +33,14 @@ h4 {
 .show-onclick{
     margin-top:7%;
 }
+
+.button-answer{
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    display: inline-block;
+    font-weight: 400;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
