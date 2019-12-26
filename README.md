@@ -15,7 +15,7 @@
 
 ## Link
 
- <!-- [https://aagrosse.github.io/codeQuiz/](https://aagrosse.github.io/codeQuiz/) -->
+[https://aagrosse.github.io/codeQuiz/](https://aagrosse.github.io/codeQuiz/)
 
 ## Description 
 
@@ -24,7 +24,7 @@ This project is a code trivia challenge.  Click start to begin.  There are five 
 
 ## Images
 
-<!-- ![User Interface](/assets/images/screenshot.png) -->
+![User Interface](/assets/images/screenshot.png)
 
 ## Installation
 
