@@ -7,28 +7,34 @@ var questions = [
       choices: ["strings", "booleans", "alerts", "numbers"],
       answer: "alerts"
     },
-    {
-      title: "The condition in an if / else statement is enclosed within ____.",
-      choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-      answer: "parentheses"
-    },
-    {
-      title: "Arrays in JavaScript can be used to store _________",
-      choices: ["numbers and strings", "other arrays", "booleans", "all-of-the-above"],
-      answer: "all-of-the-above"
-    },
-    {
-      title: "String values must be enclosed within _____ when being assigned to variables.",
-      choices: ["commas", "curly brackets", "quotes", "parentheses"],
-      answer: "quotes"
-    },
-    {
-      title: "A very useful tool used during debuggingfor printing content to the debugger is:",
-      choices: ["JavaScript", "terminal/ bash", "for loops", "console.log"],
-      answer: "console.log"
-      },
+    // {
+    //   title: "The condition in an if / else statement is enclosed within ____.",
+    //   choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+    //   answer: "parentheses"
+    // },
+    // {
+    //   title: "Arrays in JavaScript can be used to store _________",
+    //   choices: ["numbers and strings", "other arrays", "booleans", "all-of-the-above"],
+    //   answer: "all-of-the-above"
+    // },
+    // {
+    //   title: "String values must be enclosed within _____ when being assigned to variables.",
+    //   choices: ["commas", "curly brackets", "quotes", "parentheses"],
+    //   answer: "quotes"
+    // },
+    // {
+    //   title: "A very useful tool used during debuggingfor printing content to the debugger is:",
+    //   choices: ["JavaScript", "terminal/ bash", "for loops", "console.log"],
+    //   answer: "console.log"
+    //   },
 ]
-var secondsLeft = (questions.length) * 15
+var secondsLeft = (questions.length) * 15;
+// var highScoreInput = document.querySelector(".form-control");
+var highScoreForm = document.querySelector(".show-onclick");
+var highScoreList = document.querySelector("#high-score");
+var highScores = ["AAG : 70", "JPG : 54", "KMG : 65"];
+
+
 
 
 $("#start").on("click", function () {
@@ -40,7 +46,7 @@ $("#start").on("click", function () {
 
 function setTimer(){
     $("#seconds-left").text(secondsLeft);
-let countdown = setInterval(function(){
+var countdown = setInterval(function(){
     secondsLeft--;
     $("#seconds-left").text(secondsLeft);
     if (secondsLeft <=0) {
@@ -90,12 +96,13 @@ function incorrectAnswer(){
 }
 
 function timerStop(){
-    clearInterval(secondsLeft);
-    console.log(secondsLeft);
+    $("#timer").remove();
+    
 }
 
 function timerDown(){
     secondsLeft = secondsLeft -= 9;
+    
 }
 
 function resetRound(){
@@ -106,80 +113,121 @@ function resetRound(){
     } else {
     timerStop();
     $('.question').remove();
-    $('.show-onclick').append('<div class="form-group"> <label id= "initials" ></label><input class="form-control" placeholder="Enter initials"></div><button type="submit" class="btn btn-primary">Submit</button>');
+    $('.show-onclick').append('<div class="form-group"> <label id= "initials" ></label><input class="form-control" type="text" name="name" placeholder="Enter initials"></div><button id= "highScoresSubmit" class="btn btn-primary">Submit</button>');
     var score = secondsLeft
     $("#initials").append("Your score is: " + score);
-        
-        }    
+    // When form is submitted...
+    highScoreForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+    var highScoreText = 'AAG'//highScoreInput.value.trim();
+    var recentScore = (highScoreText + " : " + score);
+    console.log(recentScore);
+    // init()
+    scores();
+});
 }
+    
+function scores (){
+    $('.show-onclick').empty();
+    $('.show-onclick').append('<button type="button" onclick= "clearArray()"; class="btn btn-info" id= "clear" style= "float:left;">Clear High Scores</button><button type="button" class="btn btn-info" id= "restart" style= "float:right;">Restart</button>');
+ 
+    $("#restart").click(function () {
+        location.reload();
+    });
+    renderScores();
+
+
+
 }
-var highScoreInput = document.querySelector(".form-control");
-var highScoreForm = document.querySelector(".btn-primary");
-var highScoreList = document.querySelector("#high-score");
-var highScores = [];
+};
 
-init();
 
-function renderHighScores() {
-  // Clear highScoreList element
+
+
+$("#highScores").click(function () {
+    //navigate to high scores
+});
+
+
+
+
+};
+
+
+
+
+
+
+function renderScores() {
+  // Clear todoList element
   highScoreList.innerHTML = "";
   
 
-  // Render a new li for each highScore
-  for (var i = 0; i < todos.length; i++) {
+  // Render a new li for each todo
+  for (var i = 0; i < highScores.length; i++) {
     var highScore = highScores[i];
+    
 
     var li = document.createElement("li");
     li.textContent = highScore;
-    li.setAttribute("data-index", i);
-    highScoreList.appendChild(li);
+    highScoreList.append(li);
   }
 }
+});
 
-function init() {
-  // Get stored highScores from localStorage
-  var storedHighScoreString = localStorage.getItem("highScores");
-  // Parsing the JSON string to an object
-  var storedHighScores = JSON.parse(storedHighScoreString);
-
-  // If highScores were retrieved from localStorage, update the highScores array to it
-  if (storedHighScores !== null) {
-    highScores = storedHighScores;
-  }
-
-  // Render highScores to the DOM
-  renderHighScores();
-}
-
-function storeHighScores() {
-  // Stringify and set "highScores" key in localStorage to highScores array
-  var highScoresString = JSON.stringify(highScores);
+// function init() {
+//     // Get stored todos from localStorage
+//     var storedScoresString = localStorage.getItem("highScores");
+//     // Parsing the JSON string to an object
+//     var storedHighScores = JSON.parse(storedScoresString);
   
-  localStorage.setItem("highScores", highScoresString);
-}
+//     // If todos were retrieved from localStorage, update the todos array to it
+//     if (storedHighScores !== null) {
+//       highScores = storedHighScores;
+//     }
+  
+//     // Render todos to the DOM
+//     renderScores();
+//   }
+  
+// function storeScores() {
+//     // Stringify and set "todos" key in localStorage to todos array
+//     var highScoresString = JSON.stringify(highScores);
+    
+//     localStorage.setItem("highScores", highScoresString);
+//   }
+  
+//   // When form is submitted...
+//   highScoresForm.addEventListener("submit", function(event) {
+//     event.preventDefault();
+  
+//     var highScoresText = AAG//highScoresInput.value.trim();
+  
+//     // Return from function early if submitted todoText is blank
+//     if (highScoresText === "") {
+//       return;
+//     }
+  
+//     // Add new todoText to todos array, clear the input
+//     highScores.push(highScoresText);
+//     highScoresInput.value = "";
+  
+//     // Store updated todos in localStorage, re-render the list
+//     storeScores();
+//     renderScores();
+  
+  
+// function clearArray(){
+//     return highScores = [];
+//     storeScores();
+//     renderScores();
+// }
+// });
 
-// When form is submitted...
-highScoreForm.addEventListener("submit", function(event) {
-  event.preventDefault();
 
-  var highScoreText = highScoreInput.value.trim();
-
-  // Return from function early if submitted highScoreText is blank
-  if (highScoreText === "") {
-    return;
-  }
-
-  // Add new highScoreText to highScores array, clear the input
-  highScores.push(highScoreText);
-  highScoreInput.value = "";
-
-  // Store updated highScores in localStorage, re-render the list
-  storeHighScores();
-  renderHighScores();
-});
-
-
-});
+// }); 
+    
+    
 
 
 

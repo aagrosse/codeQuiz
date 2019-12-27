@@ -15,27 +15,22 @@
     <div class="card shadow-sm p-3 mb-5 bg-white rounded" style="max-width: 50%; margin: 40px auto;">
         <div class="card-body">
         <button type="button" class="btn btn-light" id= "highScores" style= "float:left;">High Scores</button>
-        <button id= "timer" style= "float:right;">Time Left: <span id="seconds-left"></span></button>
+        
           <br>
           <div class="score">
             <ul id="high-score"></ul>
           </div>
           <form class= "show-onclick" id= "form">
-          </form>
-       
-          <h3 class = "question text-center"></h3> 
-          <br>
-          <div class= "answers"></div> 
-          <div class= "text-center" id= "startText">
-          <h1 class="card-title">Code Quiz Challenge</h1>
-          <br>
-          <br>
-          <p>Try and answer the following code related questions within the time limit.  Keep in mind that incorrect answers will penalize your score time by ten seconds.</p>
-          <br>
-          <br>
-          
-          <button type="button" class="btn btn-secondary btn-lg" id= "start">Start Code Quiz</button>
-         </div>
+            <div class="form-group"> 
+                <label id= "initials" ></label>
+                <input class="form-control" type="text" name="name" placeholder="Enter initials">
+            </div>
+            <button id= "highScoresSubmit" class="btn btn-primary">Submit</button>'
+            <br>
+            <br>
+            <button type="button" onclick= "clearArray()"; class="btn btn-info" id= "clear" style= "float:left;">Clear High Scores</button>
+            <button type="button" class="btn btn-info" id= "restart" style= "float:right;">Restart</button>
+        </form>
     </div>
     </div>   
 
@@ -45,18 +40,3 @@
  
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -44,3 +44,8 @@ h4 {
     line-height: 1.5;
     border-radius: .25rem;
 }
+
+#high-score{
+    margin-top: 3%;
+    list-style-type: none;
+ }
