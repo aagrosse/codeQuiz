@@ -138,7 +138,8 @@ function resetRound(){
 
 }
     
-function scores (){
+function scores(){
+    $('.empty').empty();
     $('.show-onclick').empty();
     $('.show-onclick').append('<button type="button" class="btn btn-info" id= "clear" style= "float:left;">Clear High Scores</button><button type="button" class="btn btn-info" id= "restart" style= "float:right;">Restart</button>');
  
@@ -162,8 +163,15 @@ function scores (){
 
 
 
-$("#highScores").click(function () {
-    //navigate to high scores
+$("#highScores").on("click", function () {
+    console.log("hello World");
+    $('.show-onclick').empty();
+    $('.empty').empty();
+    scores();
+    
+
+
+
 });
 
 
