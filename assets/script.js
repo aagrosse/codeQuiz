@@ -41,6 +41,32 @@ $("#start").on("click", function () {
     setTimer();
 });
 
+$("#highScores").on("click", function () {
+    console.log("hello World");
+    $('.show-onclick').empty();
+    $('.empty').empty();
+    scores();
+});
+
+
+function scores(){
+    $('.empty').empty();
+    $('.show-onclick').empty();
+    $('.show-onclick').append('<button type="button" class="btn btn-info" id= "clear" style= "float:left;">Clear High Scores</button><button type="button" class="btn btn-info" id= "restart" style= "float:right;">Restart</button>');
+ 
+    $("#restart").click(function () {
+        location.reload();
+    });
+
+    $("#clear").on("click", function () {
+        console.log("hi hello");
+        highScores = [];
+        storeScores();
+        renderScores();
+    });
+    renderScores();
+}
+
 
 function setTimer(){
     $("#seconds-left").text(secondsLeft);
@@ -54,37 +80,46 @@ var countdown = setInterval(function(){
 }
 
 
-
-
-function loadQandA() {
-    choices = questions[indexQandA].choices;
-    var question = questions[indexQandA].title;
-    $('.question').html(question);
-    for (var i = 0; i < 4; i++) {
-        var displayAnswer = questions[indexQandA].choices[i];
-        $('.answers').append('<h4 class= "button-answer" id=' + displayAnswer + '>' + displayAnswer + '</h4><br>');
+function renderScores() {
+    // Clear todoList element
+    highScoreList.innerHTML = "";
+    
+  
+    // Render a new li for each todo
+    for (var i = 0; i < highScores.length; i++) {
+      var highScore = highScores[i];
+      
+  
+      var li = document.createElement("li");
+      li.textContent = highScore;
+      highScoreList.append(li);
     }
-    
-    $("h4").click(function () {
-        var id = $(this).attr('id');
-        var answer= questions[indexQandA].answer;
-        if (id === answer) {
-            answered = true;
-            console.log("correct") 
-            // $('.question').text("Correct Answer");
-            indexQandA++;
-            correctAnswer();
-        
-        } else {
-            answered = true; 
-            // $('.question').text("Wrong Answer");
-            indexQandA++;
-            incorrectAnswer();
-        }
-    });
+  }
 
+  function init() {
+    // Get stored todos from localStorage
+    var storedScoresString = localStorage.getItem("highScores");
+    // Parsing the JSON string to an object
+    var storedHighScores = JSON.parse(storedScoresString);
+  
+    // If todos were retrieved from localStorage, update the todos array to it
+    if (storedHighScores !== null) {
+      highScores = storedHighScores;
+    }
+  
+    // Render todos to the DOM
+    renderScores();
+  }
+  
+function storeScores() {
+    // Stringify and set "todos" key in localStorage to todos array
+    var highScoresString = JSON.stringify(highScores);
     
-function correctAnswer(){
+    localStorage.setItem("highScores", highScoresString);
+  }
+
+
+  function correctAnswer(){
     resetRound();
 }
 
@@ -122,114 +157,56 @@ function resetRound(){
     var highScoresText = (highScoreInput + " : " + score);
     init()
     scores();
-    // Return from function early if submitted todoText is blank
+    // Return from function early if submitted highScores text is blank
     if (highScoresText === "") {
       return;
     }
+
   
-    // Add new todoText to todos array, clear the input
+    // Add new highScoresText to highScores array, clear the input
     highScores.push(highScoresText);
     
   
-    // Store updated todos in localStorage, re-render the list
+    // Store updated scores in localStorage, re-render the list
     storeScores();
     renderScores();
 });
 
 }
-    
-function scores(){
-    $('.empty').empty();
-    $('.show-onclick').empty();
-    $('.show-onclick').append('<button type="button" class="btn btn-info" id= "clear" style= "float:left;">Clear High Scores</button><button type="button" class="btn btn-info" id= "restart" style= "float:right;">Restart</button>');
- 
-    $("#restart").click(function () {
-        location.reload();
-    });
-
-    $("#clear").on("click", function () {
-        console.log("hello World");
-        highScores = [];
-        storeScores();
-        renderScores();
-    });
-    renderScores();
-
-
-
 }
-};
 
 
-
-
-$("#highScores").on("click", function () {
-    console.log("hello World");
-    $('.show-onclick').empty();
-    $('.empty').empty();
-    scores();
+function loadQandA() {
+    choices = questions[indexQandA].choices;
+    var question = questions[indexQandA].title;
+    $('.question').html(question);
+    for (var i = 0; i < 4; i++) {
+        var displayAnswer = questions[indexQandA].choices[i];
+        $('.answers').append('<h4 class= "button-answer" id=' + displayAnswer + '>' + displayAnswer + '</h4><br>');
+    }
     
+    $("h4").click(function () {
+        var id = $(this).attr('id');
+        var answer= questions[indexQandA].answer;
+        if (id === answer) {
+            answered = true;
+            console.log("correct") 
+            // $('.question').text("Correct Answer");
+            indexQandA++;
+            correctAnswer();
+        
+        } else {
+            answered = true; 
+            // $('.question').text("Wrong Answer");
+            indexQandA++;
+            incorrectAnswer();
+        }
+    });
+}
 
 
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-function renderScores() {
-  // Clear todoList element
-  highScoreList.innerHTML = "";
-  
-
-  // Render a new li for each todo
-  for (var i = 0; i < highScores.length; i++) {
-    var highScore = highScores[i];
-    
-
-    var li = document.createElement("li");
-    li.textContent = highScore;
-    highScoreList.append(li);
-  }
-}
-
-function init() {
-    // Get stored todos from localStorage
-    var storedScoresString = localStorage.getItem("highScores");
-    // Parsing the JSON string to an object
-    var storedHighScores = JSON.parse(storedScoresString);
-  
-    // If todos were retrieved from localStorage, update the todos array to it
-    if (storedHighScores !== null) {
-      highScores = storedHighScores;
-    }
-  
-    // Render todos to the DOM
-    renderScores();
-  }
-  
-function storeScores() {
-    // Stringify and set "todos" key in localStorage to todos array
-    var highScoresString = JSON.stringify(highScores);
-    
-    localStorage.setItem("highScores", highScoresString);
-  }
-  
-
-
-}
-
-}); 
-
-
 
     
     
