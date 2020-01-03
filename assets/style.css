@@ -2,6 +2,7 @@ body {
     background: url("./Images/herringbone.png") !important;
     background-position: center;
     background-size: cover;
+    
 }
 
 h2 {
@@ -49,3 +50,11 @@ h4 {
     margin-top: 3%;
     list-style-type: none;
  }
+
+ .card{
+     opacity: .85;
+     box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.2), 0 24px 80px 60px rgba(0, 0, 0, 0.19) !important;
+
+ }
+
+ 

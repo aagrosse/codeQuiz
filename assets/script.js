@@ -42,7 +42,6 @@ $("#start").on("click", function () {
 });
 
 $("#highScores").on("click", function () {
-    console.log("hello World");
     $('.show-onclick').empty();
     $('.empty').empty();
     init()
@@ -60,7 +59,6 @@ function scores(){
     });
 
     $("#clear").on("click", function () {
-        console.log("hi hello");
         highScores = [];
         storeScores();
         renderScores();
@@ -82,11 +80,11 @@ var countdown = setInterval(function(){
 
 
 function renderScores() {
-    // Clear todoList element
+    // Clear highScoreList element
     highScoreList.innerHTML = "";
     
   
-    // Render a new li for each todo
+    // Render a new li for each score
     for (var i = 0; i < highScores.length; i++) {
       var highScore = highScores[i];
       
@@ -98,22 +96,22 @@ function renderScores() {
   }
 
   function init() {
-    // Get stored todos from localStorage
+    // Get stored scores from localStorage
     var storedScoresString = localStorage.getItem("highScores");
     // Parsing the JSON string to an object
     var storedHighScores = JSON.parse(storedScoresString);
   
-    // If todos were retrieved from localStorage, update the todos array to it
+    // If scores were retrieved from localStorage, update the scores array to it
     if (storedHighScores !== null) {
       highScores = storedHighScores;
     }
   
-    // Render todos to the DOM
+    // Render highScores to the DOM
     renderScores();
   }
   
 function storeScores() {
-    // Stringify and set "todos" key in localStorage to todos array
+    // Stringify and set "highScores" key in localStorage to highScores array
     var highScoresString = JSON.stringify(highScores);
     
     localStorage.setItem("highScores", highScoresString);
